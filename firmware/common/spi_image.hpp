@@ -74,6 +74,7 @@ constexpr image_tag_t image_tag_capture				{ 'P', 'C', 'A', 'P' };
 constexpr image_tag_t image_tag_ert					{ 'P', 'E', 'R', 'T' };
 constexpr image_tag_t image_tag_nfm_audio			{ 'P', 'N', 'F', 'M' };
 constexpr image_tag_t image_tag_pocsag				{ 'P', 'P', 'O', 'C' };
+constexpr image_tag_t image_tag_secplus				{ 'P', 'S', 'E', 'C' };
 constexpr image_tag_t image_tag_sonde				{ 'P', 'S', 'O', 'N' };
 constexpr image_tag_t image_tag_tpms				{ 'P', 'T', 'P', 'M' };
 constexpr image_tag_t image_tag_wfm_audio			{ 'P', 'W', 'F', 'M' };

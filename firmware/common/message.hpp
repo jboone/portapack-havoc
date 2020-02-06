@@ -36,6 +36,7 @@
 #include "adsb_frame.hpp"
 #include "ert_packet.hpp"
 #include "pocsag_packet.hpp"
+#include "secplus_packet.hpp"
 #include "sonde_packet.hpp"
 #include "tpms_packet.hpp"
 #include "jammer.hpp"
@@ -109,6 +110,9 @@ public:
 		AudioLevelReport = 51,
 		CodedSquelch = 52,
 		AudioSpectrum = 53,
+
+		SecplusPacket = 54,
+
 		MAX
 	};
 
@@ -326,6 +330,21 @@ public:
 	}
 
 	baseband::Packet packet;
+};
+
+class SecplusPacketMessage : public Message {
+public:
+	constexpr SecplusPacketMessage(
+		const Timestamp received_at,
+		const std::array<uint8_t, 21> symbols
+	) : Message { ID::SecplusPacket },
+		received_at { received_at },
+		symbols { symbols }
+	{
+	}
+
+	Timestamp received_at;
+	std::array<uint8_t, 21> symbols;
 };
 
 class TPMSPacketMessage : public Message {
