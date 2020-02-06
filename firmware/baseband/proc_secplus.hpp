@@ -74,7 +74,10 @@ private:
 	size_t current_sample = 0;
 	size_t last_rise = 0;
 	std::array<uint8_t, 21> buffer;
+	std::array<uint8_t, 21> pairs[2];
+	std::array<uint8_t, 21> last_pairs[2];
 	size_t buffer_items = 0;
+	size_t pairs_count = 0;
 
 	void process_symbol(const size_t on_samples);
 	void process_buffer();

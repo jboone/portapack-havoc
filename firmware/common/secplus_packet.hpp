@@ -35,7 +35,7 @@ class Packet {
 public:
 	constexpr Packet(
 		const Timestamp timestamp,
-		const std::array<uint8_t, 21>& symbols
+		const std::array<uint8_t, 21> &symbols
 	) : timestamp_ { timestamp },
 		symbols_ { symbols }
 	{

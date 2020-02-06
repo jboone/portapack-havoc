@@ -81,9 +81,23 @@ void SecplusProcessor::process_symbol(const size_t on_samples) {
 	}
 
 	if (buffer_items == 21) {
-		const SecplusPacketMessage message { Timestamp::now(), buffer };
-		shared_memory.application_queue.push(message);
+		process_buffer();
 		buffer_items = 0;
+	}
+}
+
+void SecplusProcessor::process_buffer() {
+	if (buffer[0] == 0) {
+		pairs[0] = buffer;
+		pairs_count = 1;
+	} else if ((pairs_count == 1) && (buffer[0] == 2)) {
+		pairs[1] = buffer;
+		pairs_count = 2;
+	}
+
+	if ((pairs_count == 2) && (pairs != last_pairs)) {
+		const SecplusPacketMessage message { Timestamp::now(), pairs[0], pairs[1] };
+		shared_memory.application_queue.push(message);
 	}
 }
 
