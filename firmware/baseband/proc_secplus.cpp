@@ -88,16 +88,17 @@ void SecplusProcessor::process_symbol(const size_t on_samples) {
 
 void SecplusProcessor::process_buffer() {
 	if (buffer[0] == 0) {
-		pairs[0] = buffer;
-		pairs_count = 1;
-	} else if ((pairs_count == 1) && (buffer[0] == 2)) {
-		pairs[1] = buffer;
-		pairs_count = 2;
+		std::copy(buffer.begin() + 1, buffer.end(), pair.begin());
+		pair_items = 20;
+	} else if ((pair_items == 20) && (buffer[0] == 2)) {
+		std::copy(buffer.begin() + 1, buffer.end(), pair.begin() + pair_items);
+		pair_items = 40;
 	}
 
-	if ((pairs_count == 2) && (pairs != last_pairs)) {
-		const SecplusPacketMessage message { Timestamp::now(), pairs[0], pairs[1] };
+	if ((pair_items == 40) && (pair != last_pair)) {
+		const SecplusPacketMessage message { Timestamp::now(), pair };
 		shared_memory.application_queue.push(message);
+		last_pair = pair;
 	}
 }
 

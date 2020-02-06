@@ -336,18 +336,15 @@ class SecplusPacketMessage : public Message {
 public:
 	constexpr SecplusPacketMessage(
 		const Timestamp received_at,
-		const std::array<uint8_t, 21> pair_0,
-		const std::array<uint8_t, 21> pair_1
+		const std::array<uint8_t, 40> pair
 	) : Message { ID::SecplusPacket },
 		received_at { received_at },
-		pair_0 { pair_0 },
-		pair_1 { pair_1 }
+		pair { pair }
 	{
 	}
 
 	Timestamp received_at;
-	std::array<uint8_t, 21> pair_0;
-	std::array<uint8_t, 21> pair_1;
+	std::array<uint8_t, 40> pair;
 };
 
 class TPMSPacketMessage : public Message {

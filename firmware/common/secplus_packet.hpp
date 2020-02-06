@@ -35,9 +35,9 @@ class Packet {
 public:
 	constexpr Packet(
 		const Timestamp timestamp,
-		const std::array<uint8_t, 21> &symbols
+		const std::array<uint8_t, 40> pair
 	) : timestamp_ { timestamp },
-		symbols_ { symbols }
+		pair_ { pair }
 	{
 	}
 
@@ -47,7 +47,7 @@ public:
 
 private:
 	const Timestamp timestamp_;
-	const std::array<uint8_t, 21> symbols_;
+	const std::array<uint8_t, 40> pair_;
 };
 
 } /* namespace secplus */

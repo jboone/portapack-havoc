@@ -86,7 +86,7 @@ private:
 		Message::ID::SecplusPacket,
 		[this](Message* const p) {
 			const auto message = static_cast<const SecplusPacketMessage*>(p);
-			const secplus::Packet packet { message->received_at, message->pair_0 };
+			const secplus::Packet packet { message->received_at, message->pair };
 			this->on_packet(packet);
 		}
 	};
