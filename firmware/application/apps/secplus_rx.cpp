@@ -40,7 +40,8 @@ namespace format {
 } /* namespace secplus */
 
 void SecplusLogger::on_packet(const secplus::Packet& packet) {
-	log_file.write_entry(packet.timestamp(), "...");
+	const auto message = to_string_dec_uint(packet.rolling()) + "/" + to_string_dec_uint(packet.fixed());
+	log_file.write_entry(packet.timestamp(), message);
 }	
 
 namespace ui {
@@ -87,8 +88,6 @@ SecplusRXAppView::SecplusRXAppView(NavigationView& nav) : nav_ { nav } {
 	if( logger ) {
 		logger->append(u"secplus.txt");
 	}
-
-	console.write("test1\n");
 }
 
 SecplusRXAppView::~SecplusRXAppView() {
@@ -109,7 +108,12 @@ void SecplusRXAppView::on_packet(const secplus::Packet& packet) {
 	if( logger ) {
 		logger->on_packet(packet);
 	}
-	console.write(".");
+
+	const auto message_rolling = "r" + to_string_bin(packet.rolling(), 32) + "\n";
+	console.write(message_rolling);
+
+	const auto message_fixed = "f" + to_string_bin(packet.fixed(), 32) + "\n";
+	console.write(message_fixed);
 }
 
 void SecplusRXAppView::on_frequency_changed(const uint32_t new_target_frequency) {

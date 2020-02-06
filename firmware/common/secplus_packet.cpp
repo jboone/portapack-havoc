@@ -27,4 +27,32 @@
 
 namespace secplus {
 
+Packet Packet::decode(const Timestamp timestamp, const std::array<uint8_t, 40> code) {
+	int64_t rolling = 0;
+	int64_t fixed = 0;
+	int64_t acc = 0;
+
+	for (size_t i=0; i<40; i+=2) {
+		if (i <= 20) {
+			acc = 0;
+		}
+
+		const int64_t code_0 = code[i];
+		const auto digit_0 = code_0;
+		rolling = (rolling * 3) + digit_0;
+		acc += digit_0;
+
+		const int64_t code_1 = code[i+1];
+		const auto digit_1 = (code_1 - acc) % 3;
+		fixed = (fixed * 3) + digit_1;
+		acc += digit_1;
+	}
+
+	return Packet {
+		timestamp,
+		rolling,
+		fixed
+	};
+}
+
 } /* namespace secplus */

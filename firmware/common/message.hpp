@@ -36,7 +36,6 @@
 #include "adsb_frame.hpp"
 #include "ert_packet.hpp"
 #include "pocsag_packet.hpp"
-#include "secplus_packet.hpp"
 #include "sonde_packet.hpp"
 #include "tpms_packet.hpp"
 #include "jammer.hpp"

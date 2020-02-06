@@ -35,9 +35,11 @@ class Packet {
 public:
 	constexpr Packet(
 		const Timestamp timestamp,
-		const std::array<uint8_t, 40> pair
+		const int64_t rolling,
+		const int64_t fixed
 	) : timestamp_ { timestamp },
-		pair_ { pair }
+		rolling_ { rolling },
+		fixed_ { fixed }
 	{
 	}
 
@@ -45,9 +47,20 @@ public:
 		return timestamp_;
 	}
 
+	int64_t rolling() const {
+		return rolling_;
+	}
+
+	int64_t fixed() const {
+		return fixed_;
+	}
+
+	static Packet decode(const Timestamp timestamp, const std::array<uint8_t, 40> code);
+	
 private:
 	const Timestamp timestamp_;
-	const std::array<uint8_t, 40> pair_;
+	const int64_t rolling_;
+	const int64_t fixed_;
 };
 
 } /* namespace secplus */
