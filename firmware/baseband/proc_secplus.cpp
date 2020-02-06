@@ -25,6 +25,10 @@
 
 #include "event_m4.hpp"
 
+/* Security+ demodulator and decoder is a gently-modified version of that published
+ * by argilo: https://github.com/argilo/secplus
+ */
+
 SecplusProcessor::SecplusProcessor() {
 	decim_0.configure(taps_200k_decim_0.taps, 33554432);
 	decim_1.configure(taps_200k_decim_1.taps, 131072);

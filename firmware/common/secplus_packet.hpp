@@ -31,6 +31,10 @@
 
 namespace secplus {
 
+/* Security+ demodulator and decoder is a gently-modified version of that published
+ * by argilo: https://github.com/argilo/secplus
+ */
+
 class Packet {
 public:
 	constexpr Packet(
